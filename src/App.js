@@ -1,7 +1,7 @@
 // Libs
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 // CSS
 import './css/style.css';
 
@@ -18,7 +18,7 @@ class GuestList extends Component {
       ]
     }
   }
-  
+
   handleChange(event) {
     if(event.key == 'Enter') {
       let newName = { name: event.target.value }
@@ -27,36 +27,40 @@ class GuestList extends Component {
       this.setState({ names: newNames });
     }
   }
-  
+
   handleRemove(i) {
     var newNames = this.state.names;
     newNames.splice(i, 1);
     this.setState({ names: newNames });
   }
-  
-  render() {    
+
+  render() {
     let guests = this.state.names.map((name, i) => (
       <li key={name.name}>
         {name.name}
         <button onClick={this.handleRemove.bind(this, i)}>Remove</button>
       </li>
     ));
-    
+
     return (
       <div className="guest-list">
         <h1>Guest List</h1>
         <input type="text" placeholder="Invite Someone" value={this.state.newName} onKeyDown={this.handleChange.bind(this)} />
-        <ul>
-          
+        <ReactCSSTransitionGroup
+          component='ul'
+          transitionName='slide'
+          transitionEnterTimeout={5000}
+          transitionLeaveTimeout={5000}>
+
           {guests}
-        
-        </ul>  
+
+        </ReactCSSTransitionGroup>
       </div>
     );
   }
 }
 
 render(
-  <GuestList />, 
+  <GuestList />,
   document.getElementById('root')
 );
