@@ -42,7 +42,7 @@ button {
   box-shadow: 0 2px 0 rgba(0,0,0,.1);
 }
 .guest-list {
-  overflow: hidden;  
+  overflow: hidden;
 }
 li {
   font-size: 1.1em;
@@ -61,23 +61,45 @@ li:hover button {
 @media (min-width: 768px) {
   .container {
     width: 50%;
-  }  
+  }
 }
 
-/* ================================= 
+/* =================================
     ReactCSSTransitionGroup Classes
 ==================================== */
 
 /* start enter state */
-
+.slide-enter {
+  transform: translateX(-100%);
+  opacity: 0.01
+}
 
 /* end enter state */
-
+.slide-enter.slide-enter-active{
+  transform: translateX(0%);
+  transition: 0.5s ease-out;
+  opacity: 1
+}
 
 /* start leave state */
 
-
+.slide-leave{
+  transform: translateX(0);
+  opacity: 1
+}
 /* end leave state */
-
+.slide-leave.slide-leave-active{
+  transform: translateX(100%);
+  transition: 0.5s ease-out;
+  opacity: 0.01
+}
 
 /* initial mounting */
+.slide-appear{
+  opacity: 0;
+}
+
+.slide-appear.slide-appear-active{
+  opacity: 1;
+  transition: opacity 0.5s ease-out;
+}
